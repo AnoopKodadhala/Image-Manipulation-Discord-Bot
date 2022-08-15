@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
 from io import BytesIO
-from PIL import Image, ImageEnhance, ImageOps
-
+from PIL import Image, ImageEnhance, ImageOps, ImageFont, ImageDraw
+import textwrap
 
 client = discord.Client()
 
@@ -101,6 +101,17 @@ async def grayscale(ctx, user: discord.Member = None):
 
         await ctx.send(file=discord.File('export.png'))
 
+@client.command()
+async def toptext(ctx, *,user_msg: str):
+    for attachment in ctx.message.attachments:
+        await attachment.save('export.png')
+    userImage = Image.open('export.png')
+    font1 = ImageFont.truetype("AlfaSlabOne-Regular.ttf",50)
+    draw1 = ImageDraw.Draw(userImage)
+    draw1.text((0,0),user_msg,(255,255,255), font=font1)
+    userImage.save('export.png')
+
+    await ctx.send(file=discord.File('export.png'))
 
 
 
