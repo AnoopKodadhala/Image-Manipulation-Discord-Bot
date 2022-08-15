@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands
-import asyncio
 from io import BytesIO
-from PIL import Image, ImageFont, ImageDraw, ImageEnhance, ImageOps
-import os
+from PIL import Image, ImageEnhance, ImageOps
+
 
 client = discord.Client()
 
