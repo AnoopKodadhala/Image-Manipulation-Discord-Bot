@@ -106,13 +106,46 @@ async def toptext(ctx, *,user_msg: str):
     for attachment in ctx.message.attachments:
         await attachment.save('export.png')
     userImage = Image.open('export.png')
-    font1 = ImageFont.truetype("AlfaSlabOne-Regular.ttf",50)
     draw1 = ImageDraw.Draw(userImage)
-    draw1.text((0,0),user_msg,(255,255,255), font=font1)
+    x,y = userImage.size
+    x2 = x//2
+    y2 = y//20
+    fontSize = 75
+    while True:
+        font1 = ImageFont.truetype("AlfaSlabOne-Regular.ttf",fontSize)
+        print(draw1.textbbox((0,0) , text = user_msg, font=font1,))
+        if draw1.textlength(user_msg, font=font1,)  >= y:
+            fontSize -= 7
+        else:
+            break
+    font1 = ImageFont.truetype("AlfaSlabOne-Regular.ttf", fontSize)
+    draw1.text((x2,y2),user_msg,(255,255,255),anchor='mt', font=font1, )
     userImage.save('export.png')
 
     await ctx.send(file=discord.File('export.png'))
 
+@client.command()
+async def bottomtext(ctx, *,user_msg: str):
+    for attachment in ctx.message.attachments:
+        await attachment.save('export.png')
+    userImage = Image.open('export.png')
+    draw1 = ImageDraw.Draw(userImage)
+    x,y = userImage.size
+    x2 = x//2
+    y2 = y//20
+    fontSize = 75
+    while True:
+        font1 = ImageFont.truetype("AlfaSlabOne-Regular.ttf",fontSize)
+        print(draw1.textbbox((0,0) , text = user_msg, font=font1,))
+        if draw1.textlength(user_msg, font=font1,)  >= y:
+            fontSize -= 7
+        else:
+            break
+    font1 = ImageFont.truetype("AlfaSlabOne-Regular.ttf", fontSize)
+    draw1.text((x2,y),user_msg,(255,255,255),anchor='ms', font=font1, )
+    userImage.save('export.png')
+
+    await ctx.send(file=discord.File('export.png'))
 
 
 @client.command()
