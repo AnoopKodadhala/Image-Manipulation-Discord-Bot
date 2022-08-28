@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 from io import BytesIO
 from PIL import Image, ImageEnhance, ImageOps, ImageFont, ImageDraw
-import textwrap
+import os
+key = os.environ.get('imgBot_KEY')
 
 client = discord.Client()
 
@@ -162,4 +163,4 @@ async def send_file(ctx, *,user_msg: str):
     else:
         await ctx.send(user_msg)
 
-client.run('MTAwODI1NDM4ODQzMjgwMTgzMg.GNwEjM.WNnQaMK_KwnUYE48Wc5hXxj_6a9vuIAZYYZP10')
+client.run(str(key))
